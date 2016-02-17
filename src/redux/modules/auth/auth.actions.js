@@ -1,4 +1,5 @@
 import * as actions from './auth.constants.js';
+import { notify } from '../notification/notification.module.js';
 import cookie from 'react-cookie';
 
 const USER_ENDPOINT = '/sessions';
@@ -47,6 +48,7 @@ export function register(user) {
 
 function onLogin(dispatch, response) {
   cookie.save('token', response.token);
+  dispatch(notify('You have successfully logged in.'));
 }
 
 function removeToken() {
