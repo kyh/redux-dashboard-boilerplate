@@ -18,7 +18,7 @@ export default class PrescriptionList extends Component {
     prescriptionList: PropTypes.array,
     isLoading: PropTypes.bool,
     loaded: PropTypes.bool,
-    statusText: PropTypes.string
+    statusText: PropTypes.array
   };
 
   static reduxAsyncConnect(params, store) {

@@ -1,6 +1,13 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router'
+import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
+import { logout } from 'auth/auth.actions.js';
+
+@connect(
+  state => ({user: state.auth.user}),
+  { logout }
+)
 export default class Dashboard extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
@@ -20,6 +27,7 @@ export default class Dashboard extends Component {
           Dashboard
           <Link to="/">Prescriptions</Link>
           <Link to="/history">Order History</Link>
+          <a href="" onClick={this.handleLogout}>Logout</a>
         </nav>
         {this.props.children}
       </section>
