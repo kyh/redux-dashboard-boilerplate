@@ -10,11 +10,16 @@ export default function configureStore(apiClient, browserHistory) {
   // Sync dispatched route actions to the history
   const reduxRouterMiddleware = syncHistory(browserHistory);
 
-  const middleware = [
+  let middleware = [
     clientMiddleware(apiClient),
     reduxRouterMiddleware,
-    createLogger()
   ];
+
+  if (process.env.NODE_ENV !== 'production') {
+    let createLogger = require('redux-logger');
+
+    middleware = [...middleware, createLogger()];
+  }
 
   const createStoreWithMiddleware = applyMiddleware(...middleware)(_createStore);
   const store = createStoreWithMiddleware(rootReducer);
