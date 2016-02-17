@@ -4,7 +4,7 @@
   {
     types: [REQUEST_ACTION, SUCCESS_ACTION, FAILURE_ACTION],
     onSuccess: SUCCESS_CALLBACK,
-    onFailure: FAULURE_CALLBACK,
+    onError: FAILURE_CALLBACK,
     promise: (client) => client[METHOD]
   }
  *
@@ -19,7 +19,14 @@ export default function clientMiddleware(client) {
         return action(dispatch, getState);
       }
 
-      const { promise, types, ...rest } = action;
+      const {
+        promise,
+        types,
+        onSuccess = ()=> {},
+        onError = ()=> {},
+        ...rest
+      } = action;
+
       if (!promise) {
         return next(action);
       }
@@ -30,12 +37,12 @@ export default function clientMiddleware(client) {
       const actionPromise = promise(client);
       actionPromise.then(
         (result) => {
-          let transformedResponse = _actionCallback(result, action.onSuccess);
-          return next({...rest, result: transformedResponse, type: SUCCESS})
+          onSuccess(dispatch, result);
+          next({...rest, result, type: SUCCESS});
         },
         (error) => {
-          let transformedResponse = _actionCallback(error, action.onFailure);
-          return next({...rest, error: transformedResponse, type: FAILURE})
+          onError(dispatch, error);
+          next({...rest, error, type: FAILURE});
         }
       ).catch((error)=> {
         console.error('MIDDLEWARE ERROR:', error);
@@ -47,11 +54,3 @@ export default function clientMiddleware(client) {
   };
 }
 
-function _actionCallback(result, callback) {
-  if (callback) {
-    let transformedResponse = callback(result);
-    return transformedResponse || result;
-  }
-
-  return result;
-}

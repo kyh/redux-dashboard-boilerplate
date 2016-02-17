@@ -2,7 +2,7 @@ import { createStore as _createStore, applyMiddleware, compose } from 'redux';
 import { syncHistory } from 'react-router-redux'
 import createLogger from 'redux-logger';
 
-import apiMiddlewareWrapper from '../middleware/apiMiddlewareWrapper';
+import clientMiddleware from '../middleware/clientMiddleware';
 import rootReducer from 'reducer';
 
 export default function configureStore(apiClient, browserHistory) {
@@ -11,7 +11,7 @@ export default function configureStore(apiClient, browserHistory) {
   const reduxRouterMiddleware = syncHistory(browserHistory);
 
   const middleware = [
-    apiMiddlewareWrapper(apiClient),
+    clientMiddleware(apiClient),
     reduxRouterMiddleware,
     createLogger()
   ];

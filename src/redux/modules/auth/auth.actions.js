@@ -10,10 +10,10 @@ export function isAuthenticated(globalState) {
 
 export function authenticate() {
   return {
-    types: [actions.LOGIN, actions.LOGIN_SUCCESS, actions.LOGIN_FAIL],
+    types: [actions.AUTH, actions.AUTH_SUCCESS, actions.AUTH_FAIL],
     onSuccess: onLogin,
-    onFailure: removeToken,
-    promise: (client) => client.get(USER_ENDPOINT)
+    onError: removeToken,
+    promise: (client) => client.get(USER_ENDPOINT),
   };
 }
 
@@ -21,7 +21,7 @@ export function login(user) {
   return {
     types: [actions.LOGIN, actions.LOGIN_SUCCESS, actions.LOGIN_FAIL],
     onSuccess: onLogin,
-    onFailure: removeToken,
+    onError: removeToken,
     promise: (client) => client.post(USER_ENDPOINT, {
       data: { user: user }
     })
@@ -45,7 +45,7 @@ export function register(user) {
   };
 }
 
-function onLogin(response) {
+function onLogin(dispatch, response) {
   cookie.save('token', response.token);
 }
 

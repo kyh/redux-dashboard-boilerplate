@@ -9,6 +9,31 @@ const initialState = {
 };
 
 const reducerMap = {
+  [actions.AUTH]: (state, action) => {
+    return {
+      ...state,
+      loading: true
+    };
+  },
+  [actions.AUTH_SUCCESS]: (state, action) => {
+    return {
+      ...state,
+      loading: false,
+      isAuthenticated: true,
+      user: action.result.user,
+      token: action.result.token,
+    };
+  },
+  [actions.AUTH_FAIL]: (state, action) => {
+    return {
+      ...state,
+      loading: false,
+      user: null,
+      token: null,
+      statusText: action.error
+    };
+  },
+
   [actions.LOGIN]: (state, action) => {
     return {
       ...state,
@@ -33,6 +58,7 @@ const reducerMap = {
       statusText: action.error
     };
   },
+
   [actions.LOGOUT]: (state, action) => {
     return {
       ...state,
