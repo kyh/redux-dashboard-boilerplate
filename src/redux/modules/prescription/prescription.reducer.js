@@ -7,7 +7,7 @@ const initialState = {
 };
 
 const reducerMap = {
-  [actions.GET_PRESCRIPTIONS]: (state, action) => {
+  [actions.GET_PRESCRIPTIONS]: (state) => {
     return {
       ...state,
       loading: true,
@@ -22,7 +22,7 @@ const reducerMap = {
       prescriptions: action.result,
     };
   },
-  [actions.GET_PRESCRIPTIONS_FAIL]: (state, action) => {
+  [actions.GET_PRESCRIPTIONS_FAIL]: (state) => {
     return {
       ...state,
       loading: false,

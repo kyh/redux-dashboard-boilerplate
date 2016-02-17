@@ -8,7 +8,11 @@ export function isLoaded(globalState) {
 
 export function fetchAll() {
   return {
-    types: [actions.GET_PRESCRIPTIONS, actions.GET_PRESCRIPTIONS_SUCCESS, actions.GET_PRESCRIPTIONS_FAIL],
+    types: [
+      actions.GET_PRESCRIPTIONS,
+      actions.GET_PRESCRIPTIONS_SUCCESS,
+      actions.GET_PRESCRIPTIONS_FAIL
+    ],
     promise: (client) => client.get(PRESCRIPTION_ENDPOINT)
   };
 }
