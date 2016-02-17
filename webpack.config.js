@@ -20,7 +20,7 @@ var config = getConfig({
           description: appConfig.description
         }
       })
-    }
+    };
   }
 });
 
