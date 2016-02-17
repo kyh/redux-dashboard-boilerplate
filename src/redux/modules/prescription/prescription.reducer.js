@@ -3,8 +3,7 @@ import * as actions from './prescription.constants.js';
 const initialState = {
   prescriptions: [],
   loading: false,
-  loaded: false,
-  statusText: null
+  loaded: false
 };
 
 const reducerMap = {
@@ -28,8 +27,7 @@ const reducerMap = {
       ...state,
       loading: false,
       loaded: false,
-      prescriptions: [],
-      statusText: action.error
+      prescriptions: []
     };
   }
 };

@@ -8,8 +8,7 @@ import { isLoaded, fetchAll } from 'prescription/prescription.actions.js';
   state => ({
     prescriptionList: state.prescription.prescriptions,
     isLoading: state.prescription.loading,
-    loaded: state.prescription.loaded,
-    statusText: state.prescription.statusText
+    loaded: state.prescription.loaded
   }),
   prescriptionActions
 )
@@ -17,8 +16,7 @@ export default class PrescriptionList extends Component {
   static propTypes = {
     prescriptionList: PropTypes.array,
     isLoading: PropTypes.bool,
-    loaded: PropTypes.bool,
-    statusText: PropTypes.array
+    loaded: PropTypes.bool
   };
 
   static reduxAsyncConnect(params, store) {
