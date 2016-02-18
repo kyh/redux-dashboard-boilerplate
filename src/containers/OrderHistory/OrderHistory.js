@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import * as deliveryActions from 'delivery/deliveries.module.js';
-import { isLoaded, fetchAll } from 'delivery/deliveries.module.js';
+import * as deliveryActions from 'redux/modules/delivery/deliveries.module.js';
+import { isLoaded, fetchAll } from 'redux/modules/delivery/deliveries.module.js';
 
 @connect(
   state => ({

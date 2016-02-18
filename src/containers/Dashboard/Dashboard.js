@@ -2,10 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-import { logout } from 'auth/auth.actions.js';
+import { logout } from 'redux/modules/auth/auth.actions.js';
 
 @connect(
-  state => ({user: state.auth.user}),
+  state => ({ user: state.auth.user }),
   { logout }
 )
 export default class Dashboard extends Component {
@@ -31,6 +31,6 @@ export default class Dashboard extends Component {
         </nav>
         {this.props.children}
       </section>
-    )
+    );
   }
 }

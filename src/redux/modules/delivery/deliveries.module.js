@@ -11,7 +11,7 @@ const DELIVERY_ENDPOINT = '/deliveries';
 
 // Action Creators
 export function isLoaded(globalState) {
-  return globalState.prescription && globalState.prescription.loaded;
+  return globalState.deliveries && globalState.deliveries.loaded;
 }
 
 export function fetchAll() {

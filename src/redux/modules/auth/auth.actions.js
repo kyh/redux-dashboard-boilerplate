@@ -11,8 +11,12 @@ export function resetCache() {
   };
 }
 
+function _saveToken(token) {
+  cookie.save('token', token);
+}
+
 function onLogin(dispatch, response) {
-  cookie.save('token', response.token);
+  _saveToken(response.token);
   dispatch(notify({
     message: 'You have successfully logged in.'
   }));
@@ -40,7 +44,7 @@ export function isAuthenticated(globalState) {
 export function authenticate() {
   return {
     types: [actions.AUTH, actions.AUTH_SUCCESS, actions.AUTH_FAIL],
-    onSuccess: onLogin,
+    onSuccess: (dispatch, response) => _saveToken(response.token),
     onError: onAuthError,
     promise: (client) => client.get(USER_ENDPOINT),
   };

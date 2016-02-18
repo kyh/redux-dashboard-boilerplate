@@ -1,12 +1,10 @@
-import { createStore as _createStore, applyMiddleware, compose } from 'redux';
-import { syncHistory } from 'react-router-redux'
-import createLogger from 'redux-logger';
+import { createStore as _createStore, applyMiddleware } from 'redux';
+import { syncHistory } from 'react-router-redux';
 
 import clientMiddleware from '../middleware/clientMiddleware';
-import rootReducer from 'reducer';
+import rootReducer from '../modules/reducer';
 
 export default function configureStore(apiClient, browserHistory) {
-
   // Sync dispatched route actions to the history
   const reduxRouterMiddleware = syncHistory(browserHistory);
 
@@ -16,7 +14,7 @@ export default function configureStore(apiClient, browserHistory) {
   ];
 
   if (process.env.NODE_ENV !== 'production') {
-    let createLogger = require('redux-logger');
+    const createLogger = require('redux-logger');
 
     middleware = [...middleware, createLogger()];
   }

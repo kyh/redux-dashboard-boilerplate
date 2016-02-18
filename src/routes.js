@@ -1,7 +1,10 @@
 import React from 'react';
 import { IndexRoute, Route } from 'react-router';
-import { isAuthenticated as isAuthLoaded, authenticate as loadAuth } from 'redux/modules/auth/auth.actions.js';
 import * as Containers from './containers';
+import {
+  isAuthenticated as isAuthLoaded, authenticate as loadAuth
+} from 'redux/modules/auth/auth.actions.js';
+
 
 export default (store) => {
   const requireLogin = (nextState, replace, cb) => {

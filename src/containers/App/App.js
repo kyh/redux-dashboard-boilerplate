@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { isAuthenticated as isAuthLoaded, authenticate as loadAuth } from 'auth/auth.actions.js';
 
 @connect(
-  state => ({user: state.auth.user}),
+  state => ({ user: state.auth.user }),
 )
 export default class App extends Component {
   static propTypes = {
+    user: PropTypes.object,
     children: PropTypes.object.isRequired,
   };
 
