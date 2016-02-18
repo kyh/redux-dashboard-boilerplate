@@ -48,14 +48,7 @@ const reducerMap = {
       deliveries: action.result,
     };
   },
-  [GET_DELIVERIES_FAIL]: (state) => {
-    return {
-      ...state,
-      loading: false,
-      loaded: false,
-      deliveries: []
-    };
-  },
+  [GET_DELIVERIES_FAIL]: () => initialState,
   [RESET_CACHE]: () => initialState
 };
 

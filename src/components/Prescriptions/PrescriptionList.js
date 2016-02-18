@@ -12,7 +12,6 @@ export default class PrescriptionList extends Component {
   }
 
   render() {
-    console.log(this);
     return (
       <section>
         { this.renderTitle(this.props.title) }
