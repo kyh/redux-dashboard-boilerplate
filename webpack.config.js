@@ -25,9 +25,7 @@ var config = getConfig({
 });
 
 config.resolve.root = [
-  path.resolve('./src/redux/modules'),
-  path.resolve('./src/helpers'),
-  path.resolve('./src/static')
+  path.resolve('./src')
 ];
 
 module.exports = config;

@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { browserHistory, Router } from 'react-router';
 import { ReduxAsyncConnect } from 'redux-async-connect';
 
-import ApiClient from 'ApiClient';
+import ApiClient from './helpers/ApiClient';
 import getRoutes from './routes';
 import configureStore from './redux/store/configureStore';
 
@@ -16,10 +16,12 @@ const rootElement = document.getElementById('root');
 // Required for replaying actions from devtools to work
 // reduxRouterMiddleware.listenForReplays(store)
 
+function renderAsyncConnect(props) {
+  return <ReduxAsyncConnect {...props} helpers={{ apiClient }} />;
+}
+
 const component = (
-  <Router render={(props) =>
-        <ReduxAsyncConnect {...props} helpers={{apiClient}} />
-      } history={browserHistory}>
+  <Router render={renderAsyncConnect} history={browserHistory}>
     {getRoutes(store)}
   </Router>
 );
