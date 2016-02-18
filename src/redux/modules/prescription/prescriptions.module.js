@@ -2,6 +2,9 @@
  * Prescriptions module
  */
 import { RESET_CACHE } from '../auth/auth.constants.js';
+import {
+  PRESCRIPTION_GROUPS, attachPrescriptionUiInfo, groupPrescriptions
+} from './prescriptions.helper.js';
 
 export const GET_PRESCRIPTIONS = 'GET_PRESCRIPTIONS';
 export const GET_PRESCRIPTIONS_SUCCESS = 'GET_PRESCRIPTIONS_SUCCESS';
@@ -27,7 +30,7 @@ export function fetchAll() {
 
 // Reducer
 const initialState = {
-  prescriptions: [],
+  groupedPrescriptions: { ...PRESCRIPTION_GROUPS },
   loading: false,
   loaded: false
 };
@@ -41,21 +44,16 @@ const reducerMap = {
     };
   },
   [GET_PRESCRIPTIONS_SUCCESS]: (state, action) => {
+    const prescriptions = action.result;
+
     return {
       ...state,
       loading: false,
       loaded: true,
-      prescriptions: action.result,
+      groupedPrescriptions: groupPrescriptions(prescriptions.map(attachPrescriptionUiInfo)),
     };
   },
-  [GET_PRESCRIPTIONS_FAIL]: (state) => {
-    return {
-      ...state,
-      loading: false,
-      loaded: false,
-      prescriptions: []
-    };
-  },
+  [GET_PRESCRIPTIONS_FAIL]: () => initialState,
   [RESET_CACHE]: () => initialState
 };
 
