@@ -1,3 +1,8 @@
+/**
+ * Notifications module
+ *
+ * Manages alerts and notifications on dashboard
+ */
 export const NOTIFY = 'NOTIFY';
 export const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION';
 export const REMOVE_ALL_NOTIFICATIONS = 'REMOVE_ALL_NOTIFICATIONS';
@@ -5,6 +10,7 @@ export const REMOVE_ALL_NOTIFICATIONS = 'REMOVE_ALL_NOTIFICATIONS';
 const REMOVE_NOTIFICATION_DELAY = 5000;
 let notificationID = 0;
 
+// Action Creators
 export function removeNotification(id) {
   return {
     type: REMOVE_NOTIFICATION,

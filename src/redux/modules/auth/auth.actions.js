@@ -5,8 +5,10 @@ import cookie from 'react-cookie';
 const USER_ENDPOINT = '/sessions';
 const REGISTER_ENDPOINT = '/users';
 
-function removeToken() {
-  cookie.remove('token');
+export function resetCache() {
+  return {
+    type: actions.RESET_CACHE
+  };
 }
 
 function onLogin(dispatch, response) {
@@ -17,13 +19,18 @@ function onLogin(dispatch, response) {
 }
 
 function onAuthError(dispatch, response) {
-  removeToken();
+  cookie.remove('token');
 
   dispatch(notify({
     status: 'error',
     remainOnScreen: true,
     message: response[0]
   }));
+}
+
+function onLogout(dispatch) {
+  cookie.remove('token');
+  dispatch(resetCache());
 }
 
 export function isAuthenticated(globalState) {
@@ -53,7 +60,7 @@ export function login(user) {
 export function logout() {
   return {
     types: [actions.LOGOUT, actions.LOGOUT_SUCCESS, actions.LOGOUT_FAIL],
-    onSuccess: removeToken,
+    onSuccess: onLogout,
     promise: (client) => client.del(USER_ENDPOINT)
   };
 }

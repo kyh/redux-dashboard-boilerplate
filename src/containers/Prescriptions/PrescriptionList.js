@@ -1,14 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import * as prescriptionActions from 'prescription/prescription.actions.js';
-import { isLoaded, fetchAll } from 'prescription/prescription.actions.js';
+import * as prescriptionActions from 'prescription/prescriptions.module.js';
+import { isLoaded, fetchAll } from 'prescription/prescriptions.module.js';
 
 @connect(
   state => ({
-    prescriptionList: state.prescription.prescriptions,
-    isLoading: state.prescription.loading,
-    loaded: state.prescription.loaded
+    prescriptionList: state.prescriptions.prescriptions,
+    isLoading: state.prescriptions.loading,
+    loaded: state.prescriptions.loaded
   }),
   prescriptionActions
 )
@@ -20,7 +20,7 @@ export default class PrescriptionList extends Component {
   };
 
   static reduxAsyncConnect(params, store) {
-    const {dispatch, getState} = store;
+    const { dispatch, getState } = store;
     if (!isLoaded(getState())) {
       return dispatch(fetchAll());
     }
@@ -30,10 +30,16 @@ export default class PrescriptionList extends Component {
     return (
       <section>
         <h1>My Prescriptions</h1>
-        <pre>
-          { this.props.prescriptions }
-        </pre>
+        <section>
+          {
+            this.props.prescriptionList.map((prescription) =>
+              <pre key={prescription.id}>
+                { JSON.stringify(prescription, null, '\t') }
+              </pre>
+            )
+          }
+        </section>
       </section>
-    )
+    );
   }
 }
