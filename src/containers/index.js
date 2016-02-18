@@ -6,7 +6,7 @@ export PasswordReset from './Login/PasswordReset';
 
 // Dashboard
 export Dashboard from './Dashboard/Dashboard';
-export PrescriptionList from './Prescriptions/PrescriptionList';
+export Prescriptions from './Prescriptions/Prescriptions';
 export OrderHistory from './OrderHistory/OrderHistory';
 
 // Error Pages

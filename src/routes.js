@@ -1,12 +1,12 @@
 import React from 'react';
 import { IndexRoute, Route } from 'react-router';
-import { isAuthenticated as isAuthLoaded, authenticate as loadAuth } from 'auth/auth.actions.js';
+import { isAuthenticated as isAuthLoaded, authenticate as loadAuth } from 'redux/modules/auth/auth.actions.js';
 import * as Containers from './containers';
 
 export default (store) => {
   const requireLogin = (nextState, replace, cb) => {
     function checkAuth() {
-      const { auth: { user }} = store.getState();
+      const { auth: { user } } = store.getState();
       if (!user) {
         // oops, not logged in, so can't be here!
         replace({
@@ -29,7 +29,7 @@ export default (store) => {
     <Route path="/" component={Containers.App}>
       { /* Routes requiring login */ }
       <Route component={Containers.Dashboard} onEnter={requireLogin}>
-        <IndexRoute component={Containers.PrescriptionList}/>
+        <IndexRoute component={Containers.Prescriptions}/>
         <Route path="history" component={Containers.OrderHistory}/>
       </Route>
 
