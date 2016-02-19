@@ -64,6 +64,18 @@ export function notify(notification) {
   };
 }
 
+/**
+ * @param {array} error - array of errors returned back from the server
+ */
+export function notifyServerErrors(errors) {
+  errors.forEach((error) => notify({
+    status: 'error',
+    remainOnScreen: true,
+    clearAllFirst: errors.length < 1,
+    message: error.message,
+  }));
+}
+
 // Reducer
 const initialState = {
   notifications: []
