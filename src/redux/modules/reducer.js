@@ -5,6 +5,7 @@ import { reducer as reduxAsyncConnect } from 'redux-async-connect';
 import auth from './auth/auth.reducer.js';
 import notification from './notification/notification.module.js';
 import prescriptions from './prescription/prescriptions.module.js';
+import prescription from './prescription/prescription.module.js';
 import deliveries from './delivery/deliveries.module.js';
 
 
@@ -14,5 +15,6 @@ export default combineReducers({
   auth,
   notification,
   prescriptions,
+  prescription,
   deliveries
 });

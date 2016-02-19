@@ -32,14 +32,6 @@ const RX_SUBSTATE_TOOLTIPS = {
 // List of errors associated with a delivery
 const DELIVERY_ERRORS = ['on_hold_card_error', 'on_hold_needs_card', 'on_hold'];
 
-export const PRESCRIPTION_GROUPS = {
-  scheduled: [],
-  requiresAttention: [],
-  unscheduled: [],
-  inactive: [],
-  hasCoupons: false
-};
-
 /**
  * @param {object} lastDelivery - fulfilled delivery object
  * @param {int} daysSupply - number of days the prescription is supplied for
@@ -114,6 +106,31 @@ function _attachPrescriptionTooltip(prescription) {
     tooltip: RX_SUBSTATE_TOOLTIPS[prescription.state.subState]
   };
 }
+
+/**
+ * Public methods and prescription configuration
+ */
+export const PRESCRIPTION_GROUPS = {
+  scheduled: [],
+  requiresAttention: [],
+  unscheduled: [],
+  inactive: [],
+  hasCoupons: false
+};
+
+export const PRESCRIPTIONS_ENDPOINT = '/prescriptions';
+
+/**
+ * Prescription Model
+ * This is a subset of the full Prescription Model from the back end
+ * (https://github.com/tinyrx/ops/blob/master/app/models/prescription.rb)
+ */
+export const PRESCRIPTION_MODEL = {
+  name: '',
+  user_copay: null,
+  pharmacy: '',
+  paper: false
+};
 
 /**
  * Wrapper around attaching RX_STATES, RX_SUBSTATES and any tooltip.
