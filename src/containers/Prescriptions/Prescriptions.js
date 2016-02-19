@@ -7,7 +7,7 @@ import { PrescriptionList } from 'components';
 
 @connect(
   state => ({
-    groupedPrescriptions: state.prescriptions.groupedPrescriptions,
+    groupedPrescriptions: state.prescriptions,
     isLoading: state.prescriptions.loading,
     loaded: state.prescriptions.loaded
   }),
@@ -33,10 +33,38 @@ export default class Prescriptions extends Component {
     return (
       <section>
         <h1>My Prescriptions</h1>
-        <PrescriptionList
-          title="Requires Attention"
-          prescriptions={ prescriptionGroups.requiresAttention }
-        />
+        {
+          prescriptionGroups.requiresAttention.length ?
+            <PrescriptionList
+              title="Requires Attention"
+              prescriptions={ prescriptionGroups.requiresAttention }
+            /> :
+            null
+        }
+        {
+          prescriptionGroups.scheduled.length ?
+            <PrescriptionList
+              title="Scheduled"
+              prescriptions={ prescriptionGroups.scheduled }
+            /> :
+            null
+        }
+        {
+          prescriptionGroups.unscheduled.length ?
+            <PrescriptionList
+              title="Unscheduled"
+              prescriptions={ prescriptionGroups.unscheduled }
+            /> :
+            null
+        }
+        {
+          prescriptionGroups.inactive.length ?
+            <PrescriptionList
+              title="Inactive"
+              prescriptions={ prescriptionGroups.inactive }
+            /> :
+            null
+        }
       </section>
     );
   }
