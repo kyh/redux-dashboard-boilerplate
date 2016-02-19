@@ -13,7 +13,7 @@
  */
 
 export default function clientMiddleware(client) {
-  return ({dispatch, getState}) => {
+  return ({ dispatch, getState }) => {
     return next => action => {
       if (typeof action === 'function') {
         return action(dispatch, getState);
@@ -22,8 +22,8 @@ export default function clientMiddleware(client) {
       const {
         promise,
         types,
-        onSuccess = ()=> {},
-        onError = ()=> {},
+        onSuccess = () => {},
+        onError = () => {},
         ...rest
       } = action;
 
@@ -32,25 +32,24 @@ export default function clientMiddleware(client) {
       }
 
       const [REQUEST, SUCCESS, FAILURE] = types;
-      next({...rest, type: REQUEST});
+      next({ ...rest, type: REQUEST });
 
       const actionPromise = promise(client);
       actionPromise.then(
         (result) => {
           onSuccess(dispatch, result);
-          next({...rest, result, type: SUCCESS});
+          next({ ...rest, result, type: SUCCESS });
         },
         (error) => {
           onError(dispatch, error);
-          next({...rest, error, type: FAILURE});
+          next({ ...rest, error, type: FAILURE });
         }
-      ).catch((error)=> {
+      ).catch((error) => {
         console.error('MIDDLEWARE ERROR:', error);
-        next({...rest, error, type: FAILURE});
+        next({ ...rest, error, type: FAILURE });
       });
 
       return actionPromise;
     };
   };
 }
-

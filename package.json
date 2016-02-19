@@ -5,6 +5,7 @@
   "main": "src/app.js",
   "dependencies": {
     "history": "2.0.0",
+    "lru-memoize": "1.0.0",
     "react": "0.14.7",
     "react-cookie": "0.4.3",
     "react-dom": "0.14.7",
@@ -13,10 +14,12 @@
     "react-router-redux": "3.0.0",
     "redux": "3.3.1",
     "redux-async-connect": "0.1.13",
+    "redux-form": "4.2.0",
     "redux-logger": "2.5.2",
     "redux-thunk": "1.0.3",
     "scroll-behavior": "0.3.1",
-    "superagent": "1.7.2"
+    "superagent": "1.7.2",
+    "validator": "4.9.0"
   },
   "devDependencies": {
     "autoprefixer": "6.3.1",

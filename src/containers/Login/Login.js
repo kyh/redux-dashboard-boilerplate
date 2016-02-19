@@ -12,7 +12,6 @@ require('./Login.scss');
 )
 export default class Login extends Component {
   static propTypes = {
-    statusText: PropTypes.string,
     login: PropTypes.func
   };
 
