@@ -33,6 +33,7 @@ export default (store) => {
       { /* Routes requiring login */ }
       <Route component={Containers.Dashboard} onEnter={requireLogin}>
         <IndexRoute component={Containers.Prescriptions}/>
+        <Route path="new/prescription" component={Containers.AddPrescription}/>
         <Route path="history" component={Containers.OrderHistory}/>
       </Route>
 

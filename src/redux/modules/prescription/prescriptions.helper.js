@@ -119,6 +119,7 @@ export const PRESCRIPTION_GROUPS = {
 };
 
 export const PRESCRIPTIONS_ENDPOINT = '/prescriptions';
+export const DRUGS_ENDPOINT = '/drugs';
 
 /**
  * Prescription Model

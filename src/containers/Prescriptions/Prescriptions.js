@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
 import * as prescriptionActions from 'redux/modules/prescription/prescriptions.module.js';
@@ -33,6 +34,7 @@ export default class Prescriptions extends Component {
     return (
       <section>
         <h1>My Prescriptions</h1>
+        <Link to="/new/prescription">Add new prescription</Link>
         {
           prescriptionGroups.requiresAttention.length ?
             <PrescriptionList
