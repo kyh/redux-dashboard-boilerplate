@@ -2,7 +2,7 @@
  * Prescription module - handles single prescription store
  */
 import { notify, notifyServerErrors } from '../notification/notification.module.js';
-import { PRESCRIPTIONS_ENDPOINT, DRUGS_ENDPOINT } from './prescriptions.helper.js';
+import { PRESCRIPTIONS_ENDPOINT } from './prescriptions.helper.js';
 
 export const ADD_PRESCRIPTION = 'ADD_PRESCRIPTION';
 export const ADD_PRESCRIPTION_SUCCESS = 'ADD_PRESCRIPTION_SUCCESS';
@@ -12,9 +12,9 @@ export const REMOVE_PRESCRIPTION = 'REMOVE_PRESCRIPTION';
 export const REMOVE_PRESCRIPTION_SUCCESS = 'REMOVE_PRESCRIPTION_SUCCESS';
 export const REMOVE_PRESCRIPTION_FAIL = 'REMOVE_PRESCRIPTION_FAIL';
 
-export const GET_DRUGS = 'GET_DRUGS';
-export const GET_DRUGS_SUCCESS = 'GET_DRUGS_SUCCESS';
-export const GET_DRUGS_FAIL = 'GET_DRUGS_FAIL';
+export const GET_PRESCRIPTION = 'GET_PRESCRIPTION';
+export const GET_PRESCRIPTION_SUCCESS = 'GET_PRESCRIPTION_SUCCESS';
+export const GET_PRESCRIPTION_FAIL = 'GET_PRESCRIPTION_FAIL';
 
 function onCreatePrescription(dispatch, response) {
   const prescription = response[0];
@@ -41,52 +41,51 @@ export function createPrescription(prescription) {
 
 export function deletePrescription(prescription) {
   return {
+    id: prescription.id,
     types: [REMOVE_PRESCRIPTION, REMOVE_PRESCRIPTION_SUCCESS, REMOVE_PRESCRIPTION_FAIL],
     onError: onResponseError,
     promise: (client) => client.del(`${PRESCRIPTIONS_ENDPOINT}/${prescription.id}`)
   };
 }
 
-export function isDrugsLoaded(globalState) {
-  return globalState.prescription && globalState.prescription.loaded;
+export function selectPrescription(prescription) {
+  return {
+    type: GET_PRESCRIPTION_SUCCESS,
+    result: prescription
+  };
 }
 
-export function fetchDrugs() {
+export function getPrescription(id) {
   return {
-    types: [GET_DRUGS, GET_DRUGS_SUCCESS, GET_DRUGS_FAIL],
-    onError: onResponseError,
-    promise: (client) => client.get(DRUGS_ENDPOINT)
+    types: [GET_PRESCRIPTION, GET_PRESCRIPTION_SUCCESS, GET_PRESCRIPTION_FAIL],
+    promise: (client) => client.get(`${PRESCRIPTIONS_ENDPOINT}/${id}`)
   };
 }
 
 // Reducer
 const initialState = {
-  drugs: [],
+  prescription: null,
   loading: false,
   loaded: false
 };
 
 const reducerMap = {
-  [GET_DRUGS]: (state) => {
+  [GET_PRESCRIPTION]: (state) => {
     return {
       ...state,
-      loading: true
+      loading: true,
+      loaded: false
     };
   },
-  [GET_DRUGS_SUCCESS]: (state, action) => {
+  [GET_PRESCRIPTION_SUCCESS]: (state, action) => {
     return {
       ...state,
-      drugs: action.result,
+      prescription: action.result,
       loading: false,
       loaded: true
     };
   },
-  [GET_DRUGS_FAIL]: (state) => {
-    return {
-      ...state,
-      loading: false
-    };
-  }
+  [GET_PRESCRIPTION_FAIL]: () => initialState
 };
 
 export default function reducer(state = initialState, action = {}) {

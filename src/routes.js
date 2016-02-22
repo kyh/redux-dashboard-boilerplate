@@ -34,6 +34,7 @@ export default (store) => {
       <Route component={Containers.Dashboard} onEnter={requireLogin}>
         <IndexRoute component={Containers.Prescriptions}/>
         <Route path="new/prescription" component={Containers.AddPrescription}/>
+        <Route path="prescription/:id" component={Containers.SinglePrescription}/>
         <Route path="history" component={Containers.OrderHistory}/>
       </Route>
 
