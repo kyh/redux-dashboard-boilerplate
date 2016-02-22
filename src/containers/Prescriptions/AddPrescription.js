@@ -2,9 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import { PrescriptionForm } from 'components';
-import {
-  isDrugsLoaded, fetchDrugs, createPrescription
-} from 'redux/modules/prescription/prescription.module.js';
+import { createPrescription } from 'redux/modules/prescription/prescription.module.js';
+import { isDrugsLoaded, fetchDrugs } from 'redux/modules/prescription/drugs.module.js';
 
 @connect(
   (state) => {

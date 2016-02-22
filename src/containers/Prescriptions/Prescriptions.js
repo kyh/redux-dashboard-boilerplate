@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
-import * as prescriptionActions from 'redux/modules/prescription/prescriptions.module.js';
 import { isLoaded, fetchAll } from 'redux/modules/prescription/prescriptions.module.js';
 import { PrescriptionList } from 'components';
 
@@ -11,12 +10,12 @@ import { PrescriptionList } from 'components';
     groupedPrescriptions: state.prescriptions,
     isLoading: state.prescriptions.loading,
     loaded: state.prescriptions.loaded
-  }),
-  prescriptionActions
+  })
 )
 export default class Prescriptions extends Component {
   static propTypes = {
     groupedPrescriptions: PropTypes.object,
+    selectPrescription: PropTypes.func,
     isLoading: PropTypes.bool,
     loaded: PropTypes.bool
   };
@@ -30,7 +29,6 @@ export default class Prescriptions extends Component {
 
   render() {
     const prescriptionGroups = this.props.groupedPrescriptions;
-
     return (
       <section>
         <h1>My Prescriptions</h1>
