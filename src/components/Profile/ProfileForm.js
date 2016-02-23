@@ -13,12 +13,12 @@ const FORM_NAME = 'profile';
 export default class ProfileForm extends Component {
   static propTypes = {
     ...propTypes,
-    prefill: PropTypes.object,
+    initialValues: PropTypes.object,
     handleSubmit: PropTypes.func.isRequired
   };
 
   componentWillMount() {
-    this.props.initializeForm(this.props.prefill);
+    this.props.initializeForm(this.props.initialValues);
   }
 
   render() {
@@ -31,6 +31,8 @@ export default class ProfileForm extends Component {
       handleSubmit,
       submitting
     } = this.props;
+
+    console.log(this);
 
     return (
       <form onSubmit={handleSubmit}>

@@ -27,6 +27,7 @@ export default class Dashboard extends Component {
           Dashboard
           <Link to="/">Prescriptions</Link>
           <Link to="/history">Order History</Link>
+          <Link to="/profile">Profile</Link>
           <a href="" onClick={this.handleLogout}>Logout</a>
         </nav>
         {this.props.children}

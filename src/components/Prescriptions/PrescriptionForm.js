@@ -10,12 +10,12 @@ const FORM_NAME = 'prescription';
 export default class PrescriptionForm extends Component {
   static propTypes = {
     ...propTypes,
-    prefill: PropTypes.object,
+    initialValues: PropTypes.object,
     handleSubmit: PropTypes.func.isRequired
   };
 
   componentWillMount() {
-    this.props.initializeForm(this.props.prefill);
+    this.props.initializeForm(this.props.initialValues);
   }
 
   render() {

@@ -36,6 +36,7 @@ export default (store) => {
         <Route path="new/prescription" component={Containers.AddPrescription}/>
         <Route path="prescription/:id" component={Containers.SinglePrescription}/>
         <Route path="history" component={Containers.OrderHistory}/>
+        <Route path="profile" component={Containers.Profile}/>
       </Route>
 
       { /* Routes */ }

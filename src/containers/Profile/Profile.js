@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
+import { ProfileForm } from 'components';
 import { updateProfile } from 'redux/modules/delivery/deliveries.module.js';
 
 @connect(
@@ -16,6 +17,10 @@ export default class Profile extends Component {
     return (
       <section>
         <h1>Profile</h1>
+        <ProfileForm
+          initialValues={this.props.user}
+          onSubmit={this.handleSubmit}
+        />
       </section>
     );
   }

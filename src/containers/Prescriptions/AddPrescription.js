@@ -7,7 +7,7 @@ import { isDrugsLoaded, fetchDrugs } from 'redux/modules/prescription/drugs.modu
 
 @connect(
   (state) => {
-    const user = state.auth.user;
+    const user = state.user.user;
     return ({
       initialValues: {
         name: '',
@@ -44,7 +44,7 @@ export default class Prescriptions extends Component {
       <section>
         <h1>Add New Prescription</h1>
         <PrescriptionForm
-          prefill={this.props.initialValues}
+          initialValues={this.props.initialValues}
           onSubmit={this.handleSubmit}
         />
       </section>
