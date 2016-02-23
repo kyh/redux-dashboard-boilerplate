@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 @connect(
-  state => ({ user: state.auth.user }),
+  state => ({ user: state.user.user }),
 )
 export default class App extends Component {
   static propTypes = {

@@ -4,6 +4,7 @@ import { reducer as reduxAsyncConnect } from 'redux-async-connect';
 import { reducer as form } from 'redux-form';
 
 import auth from './auth/auth.reducer.js';
+import user from './user/user.module.js';
 import notification from './notification/notification.module.js';
 import prescriptions from './prescription/prescriptions.module.js';
 import prescription from './prescription/prescription.module.js';
@@ -16,6 +17,7 @@ export default combineReducers({
   reduxAsyncConnect,
   form,
   auth,
+  user,
   notification,
   prescriptions,
   prescription,

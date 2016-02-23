@@ -1,7 +1,6 @@
 import * as actions from './auth.constants.js';
 
 const initialState = {
-  user: null,
   token: null,
   isAuthenticated: false,
   loading: false
@@ -19,7 +18,6 @@ const reducerMap = {
       ...state,
       loading: false,
       isAuthenticated: true,
-      user: action.result.user,
       token: action.result.token
     };
   },
@@ -27,7 +25,6 @@ const reducerMap = {
     return {
       ...state,
       loading: false,
-      user: null,
       token: null
     };
   },
@@ -43,7 +40,6 @@ const reducerMap = {
       ...state,
       loading: false,
       isAuthenticated: true,
-      user: action.result.user,
       token: action.result.token
     };
   },
@@ -51,7 +47,6 @@ const reducerMap = {
     return {
       ...state,
       loading: false,
-      user: null,
       token: null
     };
   },
@@ -67,7 +62,6 @@ const reducerMap = {
       ...state,
       loading: false,
       isAuthenticated: false,
-      user: null,
       token: null
     };
   },

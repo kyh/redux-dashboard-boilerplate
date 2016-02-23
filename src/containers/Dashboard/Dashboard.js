@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import { logout } from 'redux/modules/auth/auth.actions.js';
 
 @connect(
-  state => ({ user: state.auth.user }),
+  state => ({ user: state.user.user }),
   { logout }
 )
 export default class Dashboard extends Component {
