@@ -2,7 +2,7 @@
  * Prescriptions module - handles multiple prescriptions store
  */
 import { RESET_CACHE } from '../auth/auth.constants.js';
-import { ADD_PRESCRIPTION_SUCCESS } from './prescription.module.js';
+import { ADD_PRESCRIPTION_SUCCESS, REMOVE_PRESCRIPTION_SUCCESS } from './prescription.module.js';
 import {
   PRESCRIPTIONS_ENDPOINT, PRESCRIPTION_GROUPS, attachPrescriptionUiInfo, groupPrescriptions
 } from './prescriptions.helper.js';
@@ -30,6 +30,7 @@ export function fetchAll() {
 // Reducer
 const initialState = {
   ...PRESCRIPTION_GROUPS,
+  all: [],
   loading: false,
   loaded: false
 };
@@ -51,6 +52,7 @@ const reducerMap = {
     return {
       ...state,
       ...groupedPrescriptions,
+      all: action.result,
       loading: false,
       loaded: true
     };
@@ -68,6 +70,11 @@ const reducerMap = {
       ...state,
       unscheduled
     };
+  },
+
+  [REMOVE_PRESCRIPTION_SUCCESS]: (state, action) => {
+    console.log(state, action);
+    return state;
   },
 
   [RESET_CACHE]: () => initialState
