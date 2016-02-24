@@ -3,7 +3,6 @@ import { reduxForm, propTypes } from 'redux-form';
 
 import { USER_MODEL } from 'redux/modules/user/user.module.js';
 
-
 const FORM_NAME = 'profile';
 
 @reduxForm({

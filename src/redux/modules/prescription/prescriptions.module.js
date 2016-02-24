@@ -3,9 +3,7 @@
  */
 import { RESET_CACHE } from '../auth/auth.constants.js';
 import { ADD_PRESCRIPTION_SUCCESS, REMOVE_PRESCRIPTION_SUCCESS } from './prescription.module.js';
-import {
-  PRESCRIPTIONS_ENDPOINT, PRESCRIPTION_GROUPS, attachPrescriptionUiInfo, groupPrescriptions
-} from './prescriptions.helper.js';
+import { PRESCRIPTIONS_ENDPOINT, attachPrescriptionUiInfo } from './prescriptions.helper.js';
 
 export const GET_PRESCRIPTIONS = 'GET_PRESCRIPTIONS';
 export const GET_PRESCRIPTIONS_SUCCESS = 'GET_PRESCRIPTIONS_SUCCESS';
@@ -29,7 +27,6 @@ export function fetchAll() {
 
 // Reducer
 const initialState = {
-  ...PRESCRIPTION_GROUPS,
   all: [],
   loading: false,
   loaded: false
@@ -44,15 +41,12 @@ const reducerMap = {
     };
   },
   [GET_PRESCRIPTIONS_SUCCESS]: (state, action) => {
-    const prescriptions = action.result;
-    const groupedPrescriptions = groupPrescriptions(
-      prescriptions.map(attachPrescriptionUiInfo)
-    );
+    const prescriptions = action.result
+      .map((prescription) => attachPrescriptionUiInfo(prescription));
 
     return {
       ...state,
-      ...groupedPrescriptions,
-      all: action.result,
+      all: prescriptions,
       loading: false,
       loaded: true
     };
@@ -61,20 +55,21 @@ const reducerMap = {
 
   [ADD_PRESCRIPTION_SUCCESS]: (state, action) => {
     const prescription = attachPrescriptionUiInfo(action.result[0]);
-    const unscheduled = [
-      ...state.unscheduled,
-      prescription
-    ];
 
     return {
       ...state,
-      unscheduled
+      all: [...state.all, prescription]
     };
   },
 
   [REMOVE_PRESCRIPTION_SUCCESS]: (state, action) => {
-    console.log(state, action);
-    return state;
+    const prescriptions = state.all
+      .filter((prescription) => prescription.id !== action.id);
+
+    return {
+      ...state,
+      all: prescriptions
+    };
   },
 
   [RESET_CACHE]: () => initialState

@@ -7,14 +7,14 @@ import { PrescriptionList } from 'components';
 
 @connect(
   state => ({
-    groupedPrescriptions: state.prescriptions,
+    prescriptions: state.prescriptions.all,
     isLoading: state.prescriptions.loading,
     loaded: state.prescriptions.loaded
   })
 )
 export default class Prescriptions extends Component {
   static propTypes = {
-    groupedPrescriptions: PropTypes.object,
+    prescriptions: PropTypes.array,
     selectPrescription: PropTypes.func,
     isLoading: PropTypes.bool,
     loaded: PropTypes.bool
@@ -28,44 +28,48 @@ export default class Prescriptions extends Component {
   }
 
   render() {
-    const prescriptionGroups = this.props.groupedPrescriptions;
     return (
       <section>
         <h1>My Prescriptions</h1>
         <Link to="/new/prescription">Add new prescription</Link>
-        {
-          prescriptionGroups.requiresAttention.length ?
-            <PrescriptionList
-              title="Requires Attention"
-              prescriptions={ prescriptionGroups.requiresAttention }
-            /> :
-            null
-        }
-        {
-          prescriptionGroups.scheduled.length ?
-            <PrescriptionList
-              title="Scheduled"
-              prescriptions={ prescriptionGroups.scheduled }
-            /> :
-            null
-        }
-        {
-          prescriptionGroups.unscheduled.length ?
-            <PrescriptionList
-              title="Unscheduled"
-              prescriptions={ prescriptionGroups.unscheduled }
-            /> :
-            null
-        }
-        {
-          prescriptionGroups.inactive.length ?
-            <PrescriptionList
-              title="Inactive"
-              prescriptions={ prescriptionGroups.inactive }
-            /> :
-            null
-        }
+        <PrescriptionList
+          title="All"
+          prescriptions={ this.props.prescriptions }
+        />
       </section>
     );
   }
 }
+
+// {
+//   prescriptionGroups.requiresAttention.length ?
+//     <PrescriptionList
+//       title="All"
+//       prescriptions={ prescriptionGroups.requiresAttention }
+//     /> :
+//     null
+// }
+// {
+//   prescriptionGroups.scheduled.length ?
+//     <PrescriptionList
+//       title="Scheduled"
+//       prescriptions={ prescriptionGroups.scheduled }
+//     /> :
+//     null
+// }
+// {
+//   prescriptionGroups.unscheduled.length ?
+//     <PrescriptionList
+//       title="Unscheduled"
+//       prescriptions={ prescriptionGroups.unscheduled }
+//     /> :
+//     null
+// }
+// {
+//   prescriptionGroups.inactive.length ?
+//     <PrescriptionList
+//       title="Inactive"
+//       prescriptions={ prescriptionGroups.inactive }
+//     /> :
+//     null
+// }
