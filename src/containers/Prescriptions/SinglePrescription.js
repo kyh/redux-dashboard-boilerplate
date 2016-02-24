@@ -11,7 +11,7 @@ import {
 
 @connect(
   (state) => ({
-    prescription: state.prescription.prescription
+    prescription: state.prescription.selected
   }),
   { deletePrescription }
 )

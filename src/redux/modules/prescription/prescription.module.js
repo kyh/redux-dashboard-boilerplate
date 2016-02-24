@@ -2,7 +2,7 @@
  * Prescription module - handles single prescription store
  */
 import { notify, notifyServerErrors } from '../notification/notification.module.js';
-import { PRESCRIPTIONS_ENDPOINT } from './prescriptions.helper.js';
+import { PRESCRIPTIONS_ENDPOINT, attachPrescriptionUiInfo } from './prescriptions.helper.js';
 
 export const ADD_PRESCRIPTION = 'ADD_PRESCRIPTION';
 export const ADD_PRESCRIPTION_SUCCESS = 'ADD_PRESCRIPTION_SUCCESS';
@@ -51,6 +51,7 @@ export function deletePrescription(prescription) {
 export function selectPrescription(prescription) {
   return {
     type: GET_PRESCRIPTION_SUCCESS,
+    attatchState: false,
     result: prescription
   };
 }
@@ -58,13 +59,14 @@ export function selectPrescription(prescription) {
 export function getPrescription(id) {
   return {
     types: [GET_PRESCRIPTION, GET_PRESCRIPTION_SUCCESS, GET_PRESCRIPTION_FAIL],
+    attatchState: true,
     promise: (client) => client.get(`${PRESCRIPTIONS_ENDPOINT}/${id}`)
   };
 }
 
 // Reducer
 const initialState = {
-  prescription: null,
+  selected: null,
   loading: false,
   loaded: false
 };
@@ -78,9 +80,14 @@ const reducerMap = {
     };
   },
   [GET_PRESCRIPTION_SUCCESS]: (state, action) => {
+    let prescription = action.result;
+    if (action.attatchState) {
+      prescription = attachPrescriptionUiInfo(prescription);
+    }
+
     return {
       ...state,
-      prescription: action.result,
+      selected: prescription,
       loading: false,
       loaded: true
     };
