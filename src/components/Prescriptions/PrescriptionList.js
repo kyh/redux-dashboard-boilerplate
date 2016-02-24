@@ -1,12 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
-import { selectPrescription } from 'redux/modules/prescription/prescription.module.js';
-
-@connect(
-  null,
-  { selectPrescription }
-)
 export default class PrescriptionList extends Component {
   static propTypes = {
     prescriptions: PropTypes.array.isRequired,
@@ -14,22 +8,10 @@ export default class PrescriptionList extends Component {
     title: PropTypes.string
   };
 
-  static contextTypes = {
-    router: React.PropTypes.object.isRequired
-  };
-
-  handleClick = (prescription) => {
-    return (event) => {
-      event.preventDefault();
-      this.props.selectPrescription(prescription);
-      this.context.router.push(`/prescription/${prescription.id}`);
-    };
-  };
-
-  renderTitle = (title) => {
+  renderTitle(title) {
     if (!title) return null;
     return <h4>{title}</h4>;
-  };
+  }
 
   render() {
     return (
@@ -37,11 +19,11 @@ export default class PrescriptionList extends Component {
         { this.renderTitle(this.props.title) }
         {
           this.props.prescriptions.map((prescription) =>
-            <a href="#" onClick={ this.handleClick(prescription) } key={prescription.id}>
-              <pre key={prescription.id}>
+            <Link to={ `/prescription/${prescription.id}` } key={prescription.id}>
+              <pre>
                 { JSON.stringify(prescription, null, '\t') }
               </pre>
-            </a>
+            </Link>
           )
         }
       </section>

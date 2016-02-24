@@ -5,7 +5,8 @@ import { isLoaded } from 'redux/modules/prescription/prescriptions.module.js';
 
 import {
   deletePrescription,
-  getPrescription
+  getPrescription,
+  selectPrescription
 } from 'redux/modules/prescription/prescription.module.js';
 
 @connect(
@@ -26,9 +27,19 @@ export default class SinglePrescription extends Component {
 
   static reduxAsyncConnect(params, store) {
     const { dispatch, getState } = store;
-    if (!isLoaded(getState())) {
+    const globalState = getState();
+
+    if (!isLoaded(globalState)) {
       return dispatch(getPrescription(params.id));
     }
+
+    const prescriptions = globalState.prescriptions.all;
+
+    return dispatch(selectPrescription(
+      prescriptions.find((prescription) =>
+        prescription.id === parseInt(params.id, 0)
+      ))
+    );
   }
 
   deletePrescription = () => {
