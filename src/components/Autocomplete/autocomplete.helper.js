@@ -55,7 +55,7 @@ const autocompleteMap = {
   }
 };
 
-export function autocompleteResults(type, prefill) {
+export function createAutocomplete(type, prefill) {
   return (value, callback) => {
     return autocompleteMap[type] ?
       autocompleteMap[type](value, callback, prefill) :

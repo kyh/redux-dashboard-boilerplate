@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import Autocomplete from 'react-autocomplete';
-import { autocompleteResults, styles } from './autocomplete.helper.js';
+import { createAutocomplete, styles } from './autocomplete.helper.js';
 
 
 @connect((state) => {
@@ -22,7 +22,7 @@ export default class TinyAutocomplete extends Component {
       loading: false
     };
 
-    this.getAutocompleteResults = autocompleteResults(props.autocompleteType, props.drugs);
+    this.getAutocompleteResults = createAutocomplete(props.autocompleteType, props.drugs);
   }
 
   onAutocompleteSelect = (value) => {
