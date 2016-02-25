@@ -110,14 +110,6 @@ function _attachPrescriptionTooltip(prescription) {
 /**
  * Public methods and prescription configuration
  */
-export const PRESCRIPTION_GROUPS = {
-  scheduled: [],
-  requiresAttention: [],
-  unscheduled: [],
-  inactive: [],
-  hasCoupons: false
-};
-
 export const PRESCRIPTIONS_ENDPOINT = '/prescriptions';
 export const DRUGS_ENDPOINT = '/drugs';
 
@@ -174,5 +166,11 @@ export function groupPrescriptions(prescriptions) {
     }
 
     return group;
-  }, { ...PRESCRIPTION_GROUPS });
+  }, {
+    scheduled: [],
+    requiresAttention: [],
+    unscheduled: [],
+    inactive: [],
+    hasCoupons: false
+  });
 }

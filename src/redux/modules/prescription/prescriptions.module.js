@@ -1,9 +1,15 @@
 /**
  * Prescriptions module - handles multiple prescriptions store
  */
+import { createSelector } from 'reselect';
+
 import { RESET_CACHE } from '../auth/auth.constants.js';
 import { ADD_PRESCRIPTION_SUCCESS, REMOVE_PRESCRIPTION_SUCCESS } from './prescription.module.js';
-import { PRESCRIPTIONS_ENDPOINT, attachPrescriptionUiInfo } from './prescriptions.helper.js';
+import {
+  PRESCRIPTIONS_ENDPOINT,
+  attachPrescriptionUiInfo,
+  groupPrescriptions
+} from './prescriptions.helper.js';
 
 export const GET_PRESCRIPTIONS = 'GET_PRESCRIPTIONS';
 export const GET_PRESCRIPTIONS_SUCCESS = 'GET_PRESCRIPTIONS_SUCCESS';
@@ -79,3 +85,12 @@ export default function reducer(state = initialState, action = {}) {
   return reducerMap[action.type] ?
     reducerMap[action.type](state, action) : state;
 }
+
+// Selectors
+export const prescriptionsGroupSelector = createSelector(
+  (state) => state.prescriptions.all,
+  (prescriptions) => {
+    const prescriptionGroups = groupPrescriptions(prescriptions);
+    return { prescriptionGroups };
+  }
+);
