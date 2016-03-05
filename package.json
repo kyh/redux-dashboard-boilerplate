@@ -1,5 +1,5 @@
 {
-  "name": "tinyrx-dashboard",
+  "name": "M45H",
   "version": "1.0.0",
   "description": "",
   "main": "src/app.js",
@@ -57,5 +57,5 @@
     "build": "webpack",
     "deploy": "npm run build"
   },
-  "author": "TinyRx"
+  "author": "Kai Yu Hsu"
 }
