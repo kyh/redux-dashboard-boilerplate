@@ -1,7 +1,7 @@
 {
-  "name": "M45H",
+  "name": "Redux Dashboard Boilerplate",
   "version": "1.0.0",
-  "description": "",
+  "description": "Boilerplate template for React Redux applications",
   "main": "src/app.js",
   "dependencies": {
     "history": "2.0.0",
