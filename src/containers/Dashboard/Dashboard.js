@@ -25,8 +25,6 @@ export default class Dashboard extends Component {
       <section>
         <nav>
           Dashboard
-          <Link to="/">Prescriptions</Link>
-          <Link to="/history">Order History</Link>
           <Link to="/profile">Profile</Link>
           <a href="" onClick={this.handleLogout}>Logout</a>
         </nav>

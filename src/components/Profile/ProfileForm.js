@@ -17,7 +17,9 @@ export default class ProfileForm extends Component {
   };
 
   componentWillMount() {
-    this.props.initializeForm(this.props.initialValues);
+    if (this.props.initialValues) {
+      this.props.initializeForm(this.props.initialValues);
+    }
   }
 
   render() {

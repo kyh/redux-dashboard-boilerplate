@@ -17,16 +17,7 @@ const PROFILE_ENDPOINT = '/users';
 export const USER_MODEL = {
   full_name: '',
   email: '',
-  phone: null,
-  bday: null,
-  default_pharmacy: '',
-  gmaps_address: {},
-  insurance_type: null,
-  insurance_on_file_with_pharmacy: true,
-  default_payment_source_id: null,
-  saved_payment_sources: [],
-  receives_email: true,
-  receives_sms: true
+  phone: null
 };
 
 // Action Creators

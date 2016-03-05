@@ -2,11 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import { ProfileForm } from 'components';
-import { updateProfile } from 'redux/modules/delivery/deliveries.module.js';
 
 @connect(
-  state => ({ user: state.user.user }),
-  { updateProfile }
+  state => ({ user: state.user.user })
 )
 export default class Profile extends Component {
   static propTypes = {
